@@ -1,0 +1,13 @@
+.idea
+.vscode
+venv
+
+#
+traineddata/*
+!traineddata/eng.traineddata
+!traineddata/jpn.traineddata
+!traineddata/chi_sim.traineddata
+!traineddata/chi_tra.traineddata
+!traineddata/deu.traineddata
+!traineddata/fra.traineddata
+!traineddata/rus.traineddata
