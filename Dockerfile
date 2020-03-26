@@ -2,6 +2,7 @@ FROM python:3.8
 MAINTAINER "ahri"<ahriknow@ahriknow.cn>
 RUN apt update -y && apt install tesseract-ocr=4.0.0-2 -y
 ADD app.py /project/app.py
+ADD db.sqlite3 /project/db.sqlite3
 ADD requirements.txt /project/requirements.txt
 COPY traineddata/eng.traineddata /usr/share/tesseract-ocr/4.00/tessdata/
 COPY traineddata/chi_sim.traineddata /usr/share/tesseract-ocr/4.00/tessdata/

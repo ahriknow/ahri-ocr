@@ -9,6 +9,7 @@ FROM python:3.8
 MAINTAINER "ahri"<ahriknow@ahriknow.cn>
 RUN apt update -y && apt install tesseract-ocr=4.0.0-2 -y
 ADD app.py /project/app.py
+ADD db.sqlite3 /project/db.sqlite3
 ADD requirements.txt /project/requirements.txt
 COPY traineddata/eng.traineddata /usr/share/tesseract-ocr/4.00/tessdata/
 COPY traineddata/chi_sim.traineddata /usr/share/tesseract-ocr/4.00/tessdata/
@@ -24,11 +25,12 @@ ENTRYPOINT ["gunicorn", "-w", "2", "-b", "0.0.0.0:9000", "app:app"]
 ## Run a container
 
 ```bash
-docker container run --name ocr -p 80:9000 -d ahriknow/ocr:v20200326
+docker container run --name ocr -p 80:9000 -v /tessdata:/usr/share/tesseract-ocr/4.00/tessdata -d ahriknow/ocr:v20200326
 ```
 
 -   `--name ocr` 容器名为 ocr
 -   `-p 80:9000` 将容器 9000 端口映射到宿主机 80 端口
+-   `-v /tessdata:/usr/share/tesseract-ocr/4.00/tessdata` 将宿主机的 /tessdata 映射到容器的 /usr/share/tesseract-ocr/4.00/tessdata (字库目录)
 -   `-d` 后台运行
 -   `ahriknow/ocr:v20200326` 镜像
 
@@ -54,5 +56,7 @@ Werkzeug==1.0.0
 | ------ | ------- | ----------- |
 | file   | 图片    | form-data   |
 | lang   | 语言    | chi_sim/eng |
+
+`GET http://ip:port/clear` 清空缓存
 
 ## Powered By ahri 20200326
