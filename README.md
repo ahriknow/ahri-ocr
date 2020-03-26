@@ -1,4 +1,4 @@
-# Ahri Image
+# Ahri OCR
 
 ## Image optical character recognition. Multi language support.
 
