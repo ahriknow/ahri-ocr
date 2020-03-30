@@ -28,7 +28,7 @@ def page_404():
 def ocr():
     try:
         file = request.files.get('file')
-        lang = request.form['lang']
+        lang = request.form.get('lang')
         md5 = hashlib.md5(file.read()).hexdigest()
         conn = sqlite3.connect('./db.sqlite3')
         c = conn.cursor()
